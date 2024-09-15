@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario de Curso</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h1 class="h4 mb-0" th:text="${cursos.id_curso != null} ? 'Editar Curso' : 'Nuevo Curso'"></h1>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/cursos}" th:object="${cursos}" method="post">
+                <input type="hidden" th:field="*{id_curso}" />
+                <div class="form-group">
+                    <label for="nombre">Nombre del Curso:</label>
+                    <input type="text" th:field="*{nombre}" id="nombre" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción del Curso:</label>
+                    <input type="text" th:field="*{descripcion}" id="descripcion" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="creditos">Créditos del Curso:</label>
+                    <input type="number" th:field="*{creditos}" id="creditos" class="form-control" required />
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="/cursos" class="btn btn-secondary">Cancelar</a> <!-- Puedes ajustar el href según sea necesario -->
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

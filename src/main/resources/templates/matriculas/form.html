@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario de Matrículas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h1 class="h4 mb-0" th:text="${matriculas.id_matricula != null} ? 'Editar Matrícula' : 'Nueva Matrícula'"></h1>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/matriculas}" th:object="${matriculas}" method="post">
+                <input type="hidden" th:field="*{id_matricula}" />
+
+                <!-- Campo para la fecha de la matrícula -->
+                <div class="form-group">
+                    <label for="fechaMatricula">Fecha de Matrícula:</label>
+                    <input type="date" th:field="*{fechaMatricula}" id="fechaMatricula" class="form-control" required />
+                </div>
+
+                <!-- Lista desplegable para seleccionar el estudiante -->
+                <div class="form-group">
+                    <label for="estudiante">Estudiante:</label>
+                    <select th:field="*{estudiantes.id_estudiante}" id="estudiante" class="form-control" required>
+                        <option th:each="estudiante : ${estudiantes}" th:value="${estudiante.id_estudiante}"
+                                th:text="${estudiante.nombre + ' ' + estudiante.apellido}"></option>
+                    </select>
+                </div>
+
+                <!-- Lista desplegable para seleccionar el curso -->
+                <div class="form-group">
+                    <label for="curso">Curso:</label>
+                    <select th:field="*{cursos.id_curso}" id="curso" class="form-control" required>
+                        <option th:each="curso : ${cursos}" th:value="${curso.id_curso}" th:text="${curso.nombre}"></option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="/matriculas" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

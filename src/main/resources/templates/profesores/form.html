@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario de Profesores</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h1 class="h4 mb-0" th:text="${profesores.id_profesor != null} ? 'Editar Profesor' : 'Nuevo Profesor'"></h1>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/profesores}" th:object="${profesores}" method="post">
+                <input type="hidden" th:field="*{id_profesor}" />
+
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" th:field="*{nombre}" id="nombre" class="form-control" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" th:field="*{apellido}" id="apellido" class="form-control" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" th:field="*{email}" id="email" class="form-control" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="especializacion">Especialización:</label>
+                    <input type="text" th:field="*{especializacion}" id="especializacion" class="form-control" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="aula">Aula Asignada:</label>
+                    <select id="aula" class="form-control" th:field="*{aulas.id_aula}" required>
+                        <option th:each="aula : ${aulas}" th:value="${aula.id_aula}" th:text="${aula.numero}">Aula</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="/profesores" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
